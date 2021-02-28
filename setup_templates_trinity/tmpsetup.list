@@ -1,0 +1,2 @@
+deb [ trusted=yes arch=amd64,i386 ] http://q4os.org/qextrepo buster-mx-cn main
+## deb [ trusted=yes arch=amd64,i386 ] file:/local_path/ ./
