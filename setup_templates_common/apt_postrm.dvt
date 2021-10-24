@@ -3,7 +3,7 @@
 if [ "$1" = "remove" ] ; then
   set +e
   rm -f /etc/apt/sources.list.d/mxrepo1.list
-  rm -f /etc/apt/sources.list.d/mxrepo2.list
+  rm -f /etc/apt/sources.list.d/mx.list
   rm -f /etc/apt/preferences.d/pin50-mxtoolsq4
   set -e
 fi

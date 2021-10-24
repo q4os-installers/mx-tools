@@ -12,7 +12,7 @@ case "$1" in
     install)
       set +e
       touch "$NEWINST_STP"
-      if [ -n "$( cat /etc/apt/sources.list.d/*.list | tr -d ' ' | grep -v "^$" | grep -v "^#" | grep -v "deb " | grep "bullseye-mx-cn" )" ] ; then
+      if [ -n "$( grep "bullseye-mx-cn" /etc/apt/sources.list.d/*.list | grep -v "/tmpsetup.list:" | grep ".list:deb " | grep "bullseye-mx-cn" )" ] ; then
         echo "MX repositories already exist, creating stamp ..."
         touch "$MXREPOSE_STP"
       fi

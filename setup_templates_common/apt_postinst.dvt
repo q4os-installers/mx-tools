@@ -16,7 +16,7 @@ case "$1" in
 
       echo "Configuring MX repositories ..."
       cp /opt/program_files/q4os-mxtools-common/repos_template/pin50-mxtoolsq4 /etc/apt/preferences.d/
-      cp /opt/program_files/q4os-mxtools-common/repos_template/mxrepo2.list /etc/apt/sources.list.d/
+      cp /opt/program_files/q4os-mxtools-common/repos_template/mx.list /etc/apt/sources.list.d/
       cp /opt/program_files/q4os-mxtools-common/repos_template/mxrepo1.list /etc/apt/sources.list.d/
       if [ -f "$MXREPOSE_STP" ] ; then
         echo "MX repositories has been added manually before, don't duplicate them."
