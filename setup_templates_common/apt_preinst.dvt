@@ -1,0 +1,36 @@
+#!/bin/sh
+set -e
+
+set +e
+NEWINST_STP="/var/lib/q4os/_apt_new_install_q4os-mxtools-common.stp" #flags new installation, even the package was installed anytime before
+MXREPOSE_STP="/var/lib/q4os/_mx_repo_exist.stp" #flags q4os-mx repositories has been added manually before, for ex. with qrepoadd tool
+rm -f "$NEWINST_STP"
+rm -f "$MXREPOSE_STP"
+set -e
+
+case "$1" in
+    install)
+      set +e
+      touch "$NEWINST_STP"
+      if [ -n "$( cat /etc/apt/sources.list.d/*.list | tr -d ' ' | grep -v "^$" | grep -v "^#" | grep -v "deb " | grep "bullseye-mx-cn" )" ] ; then
+        echo "MX repositories already exist, creating stamp ..."
+        touch "$MXREPOSE_STP"
+      fi
+      set -e
+    ;;
+
+    upgrade)
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
