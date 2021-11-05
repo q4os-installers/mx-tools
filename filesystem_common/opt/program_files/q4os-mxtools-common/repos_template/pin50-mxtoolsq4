@@ -1,3 +1,7 @@
+Explanation: do not remove this pin
+Explanation: unless you want to mismatch
+Explanation: incompatible repositories
+Explanation: ---
 Package: *
 Pin: release a=mx,n=bullseye
 Pin-Priority: 50
