@@ -1,6 +1,9 @@
 #!/bin/sh
 
 MYAPPS_PID="$( pgrep -n appsetup2 )"
+if [ -z "$MYAPPS_PID" ] ; then
+  MYAPPS_PID="$( pgrep -n qsinst )"
+fi
 
 if [ "$APPSETUP2_NONITERACTIVE" = "1" ] ; then
   exit 0
