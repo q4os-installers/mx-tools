@@ -24,6 +24,13 @@ case "$1" in
       fi
       rm -f "$MXREPOSE_STP"
 
+      FUSRNAME="$( getent passwd 1000 | awk -F':' '{ print $1 }' )"
+      if [ -n "$FUSRNAME" ] ; then
+        echo "Adding first user [$FUSRNAME] to related system groups ..."
+        addgroup --system sambashare
+        usermod -a -G sambashare $FUSRNAME
+      fi
+
       set -e
     ;;
 
