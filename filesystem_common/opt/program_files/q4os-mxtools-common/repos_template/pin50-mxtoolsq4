@@ -5,3 +5,7 @@ Explanation: ---
 Package: *
 Pin: release a=mx,n=bullseye
 Pin-Priority: 50
+
+Package: *
+Pin: release a=mx,n=bookworm
+Pin-Priority: 50
