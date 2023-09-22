@@ -16,11 +16,31 @@ case "$1" in
 
       echo "Configuring MX repositories ..."
       cp /opt/program_files/q4os-mxtools-common/repos_template/pin50-mxtoolsq4 /etc/apt/preferences.d/
-      cp /opt/program_files/q4os-mxtools-common/repos_template/mx.list /etc/apt/sources.list.d/
-      cp /opt/program_files/q4os-mxtools-common/repos_template/mxrepo1.list /etc/apt/sources.list.d/
+      REPOFL1_MX="/etc/apt/sources.list.d/mx.list"
+      REPOFL2_Q4="/etc/apt/sources.list.d/mxrepo1.list"
+      cp /opt/program_files/q4os-mxtools-common/repos_template/mx.list $REPOFL1_MX
+      cp /opt/program_files/q4os-mxtools-common/repos_template/mxrepo1.list $REPOFL2_Q4
+
+      QDSTRA="$( dash /usr/share/apps/q4os_system/bin/print_qaptdistr.sh )"
+      echo "Distro [$QDSTRA], adding repositories, configuring ..."
+      if [ "$QDSTRA" = "bookworm" ] ; then
+        sed -i 's/_subst_debian_codename_/bookworm/' $REPOFL1_MX
+        sed -i 's/_subst_debian_codename_/bookworm/' $REPOFL2_Q4
+      elif [ "$QDSTRA" = "bullseye" ] ; then
+        sed -i 's/_subst_debian_codename_/bullseye/' $REPOFL1_MX
+        sed -i 's/_subst_debian_codename_/bullseye/' $REPOFL2_Q4
+      elif [ "$QDSTRA" = "buster" ] ; then
+        sed -i 's/_subst_debian_codename_/buster/' $REPOFL1_MX
+        sed -i 's/_subst_debian_codename_/buster/' $REPOFL2_Q4
+      else
+        echo "Unsopported distro [$QDSTRA], configuring by guess ..."
+        sed -i "s/_subst_debian_codename_/$QDSTRA/" $REPOFL1_MX
+        sed -i "s/_subst_debian_codename_/$QDSTRA/" $REPOFL2_Q4
+      fi
+
       if [ -f "$MXREPOSE_STP" ] ; then
         echo "MX repositories has been added manually before, don't duplicate them."
-        sed -i 's/^deb /##deb /' /etc/apt/sources.list.d/mxrepo1.list
+        sed -i 's/^deb /##deb /' $REPOFL2_Q4
       fi
       rm -f "$MXREPOSE_STP"
 
