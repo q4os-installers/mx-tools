@@ -12,7 +12,7 @@ case "$1" in
     install)
       set +e
       touch "$NEWINST_STP"
-      if [ -n "$( grep "bookworm-mx-cn" /etc/apt/sources.list.d/*.list | grep -v "/tmpsetup.list:" | grep ".list:deb " )" ] ; then
+      if [ -n "$( grep "\-mx-cn " /etc/apt/sources.list.d/*.list | grep -v "/tmpsetup.list:" | grep ".list:deb " )" ] ; then
         echo "MX repositories already exist, creating stamp ..."
         touch "$MXREPOSE_STP"
       fi

@@ -1,6 +1,6 @@
 # MX Community Main and Test Repos
-deb http://mirrors.rit.edu/mxlinux/mx-packages/mx/repo/ bookworm main non-free
-#deb http://mirrors.rit.edu/mxlinux/mx-packages/mx/testrepo/ bookworm test
+deb http://mirrors.rit.edu/mxlinux/mx-packages/mx/repo/ _subst_debian_codename_ main non-free
+#deb http://mirrors.rit.edu/mxlinux/mx-packages/mx/testrepo/ _subst_debian_codename_ test
 
 #ahs hardware stack repo
-deb http://mirrors.rit.edu/mxlinux/mx-packages/mx/repo/ bookworm ahs
+deb http://mirrors.rit.edu/mxlinux/mx-packages/mx/repo/ _subst_debian_codename_ ahs
