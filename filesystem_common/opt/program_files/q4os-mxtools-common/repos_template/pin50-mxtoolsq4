@@ -9,3 +9,7 @@ Pin-Priority: 50
 Package: *
 Pin: release a=mx,n=bookworm
 Pin-Priority: 50
+
+Package: *
+Pin: release a=mx,n=trixie
+Pin-Priority: 50

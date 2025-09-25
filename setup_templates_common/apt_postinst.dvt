@@ -14,16 +14,26 @@ case "$1" in
       fi
       rm -f "$NEWINST_STP"
 
-      echo "Configuring MX repositories ..."
-      cp /opt/program_files/q4os-mxtools-common/repos_template/pin50-mxtoolsq4 /etc/apt/preferences.d/
-      REPOFL1_MX="/etc/apt/sources.list.d/mx.list"
-      REPOFL2_Q4="/etc/apt/sources.list.d/mxrepo1.list"
-      cp /opt/program_files/q4os-mxtools-common/repos_template/mx.list $REPOFL1_MX
-      cp /opt/program_files/q4os-mxtools-common/repos_template/mxrepo1.list $REPOFL2_Q4
-
       QDSTRA="$( dash /usr/share/apps/q4os_system/bin/print_qaptdistr.sh )"
       echo "Distro [$QDSTRA], adding repositories, configuring ..."
-      if [ "$QDSTRA" = "bookworm" ] ; then
+
+      echo "Configuring MX repositories ..."
+      cp /opt/program_files/q4os-mxtools-common/repos_template/pin50-mxtoolsq4 /etc/apt/preferences.d/
+      if [ "$QDSTRA" = "trixie" ] ; then
+        REPOFL1_MX="/etc/apt/sources.list.d/mx.list"
+        REPOFL2_Q4="/etc/apt/sources.list.d/mxrepo2.sources"
+        cp /opt/program_files/q4os-mxtools-common/repos_template/mx.list $REPOFL1_MX
+        cp /opt/program_files/q4os-mxtools-common/repos_template/mxrepo2.sources $REPOFL2_Q4
+      else
+        REPOFL1_MX="/etc/apt/sources.list.d/mx.list"
+        REPOFL2_Q4="/etc/apt/sources.list.d/mxrepo1.list"
+        cp /opt/program_files/q4os-mxtools-common/repos_template/mx.list $REPOFL1_MX
+        cp /opt/program_files/q4os-mxtools-common/repos_template/mxrepo1.list $REPOFL2_Q4
+      fi
+      if [ "$QDSTRA" = "trixie" ] ; then
+        sed -i 's/_subst_debian_codename_/trixie/' $REPOFL1_MX
+        sed -i 's/_subst_debian_codename_/trixie/' $REPOFL2_Q4
+      elif [ "$QDSTRA" = "bookworm" ] ; then
         sed -i 's/_subst_debian_codename_/bookworm/' $REPOFL1_MX
         sed -i 's/_subst_debian_codename_/bookworm/' $REPOFL2_Q4
       elif [ "$QDSTRA" = "bullseye" ] ; then
@@ -40,9 +50,10 @@ case "$1" in
 
       if [ -f "$MXREPOSE_STP" ] ; then
         echo "MX repositories has been added manually before, don't duplicate them."
-        sed -i 's/^deb /##deb /' $REPOFL2_Q4
+        # sed -i 's/^deb /##deb /' $REPOFL2_Q4
+        rm -f "$REPOFL2_Q4"
+        rm -f "$MXREPOSE_STP"
       fi
-      rm -f "$MXREPOSE_STP"
 
       FUSRNAME="$( dash /usr/share/apps/q4os_system/bin/get_first_user.sh --name )"
       if [ -n "$FUSRNAME" ] ; then

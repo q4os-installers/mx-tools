@@ -5,4 +5,4 @@ deb http://mirrors.rit.edu/mxlinux/mx-packages/mx/repo/ _subst_debian_codename_ 
 #ahs hardware stack repo
 deb http://mirrors.rit.edu/mxlinux/mx-packages/mx/repo/ _subst_debian_codename_ ahs
 
-##signed-by=/usr/share/keyrings/q4a-mxlinux.gpg
+#signed-by=/usr/share/keyrings/q4a-mxlinux.gpg

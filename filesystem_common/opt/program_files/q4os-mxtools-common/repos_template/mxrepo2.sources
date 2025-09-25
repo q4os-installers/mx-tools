@@ -1,0 +1,7 @@
+Enabled: yes
+Types: deb
+Architectures: amd64
+URIs: https://q4os.sourceforge.io/qexarepo/mxtools
+Suites: _subst_debian_codename_-mxtools-cn
+Components: main
+Signed-By: /usr/share/keyrings/q4a-q4os.gpg
