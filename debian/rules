@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+
+# See debhelper(7) (uncomment to enable).
+# Output every command that modifies files on the build system.
+#export DH_VERBOSE = 1
+
+
+%:
+	dh $@
+
+
+override_dh_install:
+	dh_install
+	rsync -a filesystem_common/* debian/q4os-mxtools-common/
+	dh_modify_debdir debian/qinstaller_common.cfg
+	mkdir -p debian/q4os-mxtools-plasma
+	dh_modify_debdir debian/qinstaller_plasma.cfg
+	mkdir -p debian/q4os-mxtools-trinity
+	dh_modify_debdir debian/qinstaller_trinity.cfg
+
+# override_dh_link:
+
+override_dh_installdeb:
+
+override_dh_builddeb:
+	dh_builddeb #--destdir=../.zout/
+	dh_build_qinstaller debian/qinstaller_plasma.cfg
+	dh_build_qinstaller debian/qinstaller_trinity.cfg
+#	#rm -rf ../.zout/ && mkdir ../.zout/ && cp ../*.deb ../*.esh ../*.qsi ../.zout/ && rm ../*.esh ../*.qsi

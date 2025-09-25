@@ -1,1 +1,0 @@
-deb [trusted=yes signed-by=/usr/share/keyrings/q4a-q4os.gpg arch=amd64] https://q4os.sourceforge.io/qexarepo/mxtools trixie-mxtools-cn main
